@@ -1,0 +1,261 @@
+{
+  "book_title": "Introduction to Algorithms — A Short Course",
+  "language": "en",
+  "chapters": [
+    {
+      "title": "Foundations of Algorithms",
+      "summary": "What algorithms are, how to describe them precisely and how to argue that they are correct.",
+      "text": "An algorithm is a finite, well-defined procedure that transforms an input into an output. This chapter introduces the vocabulary used in the rest of the course: problems and instances, pseudocode, correctness and the loop invariant technique used to prove that iterative algorithms do what they claim.",
+      "question": "What exactly counts as an algorithm?",
+      "open_item": {
+        "prompt": "Explain what an algorithm is and what it means for an algorithm to be correct.",
+        "rubric": "An algorithm is a finite, well-defined sequence of steps that transforms an input into an output; it is correct when it halts with the right output for every valid input instance."
+      },
+      "sections": [
+        {
+          "title": "What Is an Algorithm",
+          "summary": "Algorithms as finite, unambiguous procedures that solve every instance of a computational problem.",
+          "requires": [],
+          "text": "A computational problem specifies a relationship between inputs and outputs, for example: given a sequence of numbers, return the same numbers in non-decreasing order. Each concrete input, such as (31, 41, 59, 26), is an instance of the problem. An algorithm is a procedure that solves every instance: it is made of a finite number of unambiguous steps, it always halts, and it produces the correct output. Algorithms are independent of programming languages; the same algorithm can be written in Python, C or plain English. What matters is that each step is precise and can be executed mechanically. Efficiency is the second concern: two correct algorithms for the same problem can differ enormously in the time and memory they need, and that difference often matters more than faster hardware.",
+          "key_ideas": ["A problem relates inputs to outputs; an instance is one concrete input", "An algorithm is finite, unambiguous and always halts", "Correct algorithms can still differ greatly in efficiency"],
+          "question": "How is an algorithm different from a program?",
+          "quiz": [
+            {"prompt": "What is an instance of a computational problem?", "options": ["One concrete input of the problem", "A program that solves the problem", "The output of an algorithm", "A programming language"], "answer_index": 0, "feedback": "An instance is one concrete input, such as a particular list of numbers to sort."},
+            {"prompt": "Which property must every algorithm have?", "options": ["It is written in Python", "It halts after a finite number of steps", "It uses recursion", "It runs in linear time"], "answer_index": 1, "feedback": "An algorithm must always halt; language and running time are not part of the definition."},
+            {"prompt": "Why can two correct algorithms for the same problem still be very different?", "options": ["Only one of them is really correct", "They may need very different time and memory", "They must produce different outputs", "They solve different instances"], "answer_index": 1, "feedback": "Correctness is shared; efficiency is what separates them."}
+          ]
+        },
+        {
+          "title": "Pseudocode and Correctness",
+          "summary": "Writing algorithms in pseudocode and defining what it means for an algorithm to be correct.",
+          "requires": ["What Is an Algorithm"],
+          "text": "Pseudocode describes an algorithm with the structure of a programming language (assignments, conditionals, loops and procedure calls) while hiding details such as memory management or error handling. It lets us reason about the algorithm itself. An algorithm is correct if, for every input instance, it halts with the correct output. An incorrect algorithm may fail to halt on some inputs or may halt with a wrong answer. Testing on examples can reveal bugs, but it cannot prove correctness, because the number of instances is usually infinite. Proofs of correctness therefore reason about all inputs at once, usually through invariants for loops and induction for recursion. A correct but extremely slow algorithm can still be useless in practice, which is why correctness and efficiency are always studied together.",
+          "key_ideas": ["Pseudocode keeps the structure and hides implementation details", "Correct means: halts with the right output on every instance", "Tests find bugs; proofs establish correctness"],
+          "question": "Why isn't testing enough to show that an algorithm is correct?",
+          "quiz": [
+            {"prompt": "What does pseudocode intentionally leave out?", "options": ["Loops and conditionals", "Implementation details such as memory management", "The order of the steps", "The input of the algorithm"], "answer_index": 1, "feedback": "Pseudocode keeps the logic and omits low-level details."},
+            {"prompt": "When is an algorithm correct?", "options": ["When it passes all our tests", "When it halts with the correct output for every input instance", "When it runs in polynomial time", "When it is written in pseudocode"], "answer_index": 1, "feedback": "Correctness is about every instance, not only the tested ones."},
+            {"prompt": "Why can't testing alone prove correctness?", "options": ["Tests are too slow", "There are usually infinitely many instances", "Tests only check efficiency", "Pseudocode cannot be tested"], "answer_index": 1, "feedback": "Finite tests cannot cover an infinite set of inputs."}
+          ]
+        },
+        {
+          "title": "Loop Invariants",
+          "summary": "Proving iterative algorithms correct with initialization, maintenance and termination arguments.",
+          "requires": ["Pseudocode and Correctness"],
+          "text": "A loop invariant is a property that holds before every iteration of a loop. To use it as a proof of correctness we show three things. Initialization: the invariant is true before the first iteration. Maintenance: if it is true before an iteration, it remains true before the next one. Termination: when the loop ends, the invariant, together with the reason the loop stopped, gives a useful property that shows the algorithm is correct. The technique resembles mathematical induction, except that the induction stops when the loop terminates. For insertion sort, the invariant is: at the start of each iteration, the subarray to the left of the current element consists of the original elements of that part, but in sorted order. When the loop ends, that subarray is the whole array, so the array is sorted.",
+          "key_ideas": ["Three steps: initialization, maintenance, termination", "Loop invariants are induction that stops when the loop ends", "Insertion sort's invariant: the left part is always sorted"],
+          "question": "How do loop invariants relate to proof by induction?",
+          "quiz": [
+            {"prompt": "Which of these is NOT one of the three parts of a loop invariant proof?", "options": ["Initialization", "Maintenance", "Termination", "Optimization"], "answer_index": 3, "feedback": "The three parts are initialization, maintenance and termination."},
+            {"prompt": "What does the maintenance step show?", "options": ["The loop runs in linear time", "If the invariant holds before an iteration, it holds before the next one", "The invariant is true at the end", "The loop terminates"], "answer_index": 1, "feedback": "Maintenance is the inductive step."},
+            {"prompt": "What is the loop invariant of insertion sort?", "options": ["The whole array is sorted", "The subarray to the left of the current element is sorted", "The largest element is at the end", "No element moves twice"], "answer_index": 1, "feedback": "The already-processed left part is always in sorted order."}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Asymptotic Analysis",
+      "summary": "Describing how running time grows with input size using O, Omega and Theta notation.",
+      "text": "Exact running times depend on hardware and implementation details. Asymptotic analysis ignores those constant factors and asks how the running time grows as the input size n becomes large. This chapter introduces the notations used to express those growth rates and the techniques to compute them for loops and recursive algorithms.",
+      "question": "Why do we ignore constant factors when we analyze algorithms?",
+      "open_item": {
+        "prompt": "Explain the difference between Big-O, Big-Omega and Big-Theta notation.",
+        "rubric": "Big-O gives an asymptotic upper bound, Big-Omega gives an asymptotic lower bound, and Big-Theta gives a tight bound, meaning the function is both O and Omega of the same growth rate; constant factors and lower-order terms are ignored."
+      },
+      "sections": [
+        {
+          "title": "Big-O Notation",
+          "summary": "Upper bounds on the growth of running time, ignoring constants and lower-order terms.",
+          "requires": ["Asymptotic Analysis", "What Is an Algorithm"],
+          "text": "We write f(n) = O(g(n)) when there are positive constants c and n0 such that f(n) <= c * g(n) for every n >= n0. In words, beyond some input size, f grows no faster than a constant multiple of g. Big-O is an upper bound: it promises that the running time will not be worse than the bound for large inputs. Constant factors and lower-order terms disappear, so 3n^2 + 10n + 7 is O(n^2). Common growth rates, from slowest to fastest, are O(1), O(log n), O(n), O(n log n), O(n^2), O(2^n). When we say an algorithm runs in O(n^2) time we usually mean its worst-case running time is bounded by a quadratic function of the input size.",
+          "key_ideas": ["f(n) = O(g(n)) means f grows no faster than c * g(n) for large n", "Constants and lower-order terms are dropped", "Common classes: 1, log n, n, n log n, n^2, 2^n"],
+          "question": "What does it mean when an algorithm runs in O(n log n) time?",
+          "quiz": [
+            {"prompt": "3n^2 + 10n + 7 is in which class?", "options": ["O(n)", "O(n^2)", "O(n^3) only", "O(log n)"], "answer_index": 1, "feedback": "The n^2 term dominates; constants and lower-order terms are dropped."},
+            {"prompt": "Big-O notation expresses...", "options": ["a lower bound", "an upper bound", "an exact running time", "the best case only"], "answer_index": 1, "feedback": "Big-O is an asymptotic upper bound."},
+            {"prompt": "Which grows fastest?", "options": ["O(n log n)", "O(n^2)", "O(2^n)", "O(log n)"], "answer_index": 2, "feedback": "Exponential growth beats any polynomial."}
+          ]
+        },
+        {
+          "title": "Big-Omega and Big-Theta",
+          "summary": "Lower bounds and tight bounds on growth rates.",
+          "requires": ["Big-O Notation"],
+          "text": "Big-Omega is the mirror image of Big-O: f(n) = Omega(g(n)) when f(n) >= c * g(n) for some positive constant c and all large enough n, so g is an asymptotic lower bound. Big-Theta combines both: f(n) = Theta(g(n)) when f is both O(g(n)) and Omega(g(n)), so g describes the growth of f exactly, up to constant factors. Merge sort runs in Theta(n log n) time on every input. Insertion sort runs in O(n^2) time, but it is not Theta(n^2) on every input: on an already sorted array it takes only Theta(n). Lower bounds can also describe problems rather than algorithms: any comparison-based sorting algorithm needs Omega(n log n) comparisons in the worst case.",
+          "key_ideas": ["Omega is a lower bound, Theta is a tight bound", "Theta means both O and Omega of the same function", "Comparison sorting needs Omega(n log n) comparisons in the worst case"],
+          "question": "When should I use Theta instead of Big-O?",
+          "quiz": [
+            {"prompt": "f(n) = Theta(g(n)) means...", "options": ["f is O(g) only", "f is Omega(g) only", "f is both O(g) and Omega(g)", "f equals g exactly"], "answer_index": 2, "feedback": "Theta is a tight bound: upper and lower at once."},
+            {"prompt": "What is the running time of insertion sort on an already sorted array?", "options": ["Theta(n)", "Theta(n log n)", "Theta(n^2)", "Theta(1)"], "answer_index": 0, "feedback": "Each element is compared once with its neighbour and nothing moves."},
+            {"prompt": "Every comparison-based sort needs, in the worst case...", "options": ["O(n) comparisons", "Omega(n log n) comparisons", "Theta(n^2) comparisons", "Omega(2^n) comparisons"], "answer_index": 1, "feedback": "This is the classic lower bound for comparison sorting."}
+          ]
+        },
+        {
+          "title": "Analyzing Loops and Recursion",
+          "summary": "Counting operations in nested loops and solving recurrences with the recursion tree method.",
+          "requires": ["Big-O Notation"],
+          "text": "For iterative code we count how many times the innermost operation runs. A single loop over n elements does Theta(n) work; two nested loops over n elements do Theta(n^2). For recursive algorithms we write a recurrence that expresses the running time on input size n in terms of smaller inputs. Merge sort satisfies T(n) = 2T(n/2) + Theta(n): two half-size subproblems plus linear work to merge. A recursion tree makes the sum visible: each level of the tree does Theta(n) work in total and there are about log2 n levels, so T(n) = Theta(n log n). Binary search satisfies T(n) = T(n/2) + Theta(1), which gives Theta(log n). The master theorem packages these cases into a general rule for recurrences of the form T(n) = aT(n/b) + f(n).",
+          "key_ideas": ["Nested loops multiply their iteration counts", "Recursive running times are written as recurrences", "T(n) = 2T(n/2) + n solves to Theta(n log n)"],
+          "question": "How do you solve a recurrence like T(n) = 2T(n/2) + n?",
+          "quiz": [
+            {"prompt": "Two nested loops, each over n elements, do how much work?", "options": ["Theta(n)", "Theta(n log n)", "Theta(n^2)", "Theta(2n)"], "answer_index": 2, "feedback": "n iterations times n iterations."},
+            {"prompt": "T(n) = 2T(n/2) + Theta(n) solves to...", "options": ["Theta(n)", "Theta(n log n)", "Theta(n^2)", "Theta(log n)"], "answer_index": 1, "feedback": "log n levels of Theta(n) work each."},
+            {"prompt": "Which recurrence describes binary search?", "options": ["T(n) = T(n/2) + Theta(1)", "T(n) = 2T(n/2) + Theta(n)", "T(n) = T(n-1) + Theta(n)", "T(n) = 2T(n-1)"], "answer_index": 0, "feedback": "One half-size subproblem plus constant work."}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Sorting",
+      "summary": "Three classic sorting algorithms and the trade-offs between them.",
+      "text": "Sorting is the most studied problem in algorithms: it is useful on its own and it is a building block for many other algorithms. This chapter compares an incremental algorithm (insertion sort) with two divide-and-conquer algorithms (merge sort and quicksort) and analyzes their running times.",
+      "question": "Why are there so many different sorting algorithms?",
+      "open_item": {
+        "prompt": "Compare merge sort and quicksort: how do they divide the work, and what are their running times?",
+        "rubric": "Merge sort splits the array in halves, sorts them recursively and merges them, always Theta(n log n) but needs extra memory; quicksort partitions around a pivot and sorts in place, Theta(n log n) on average but Theta(n^2) in the worst case with bad pivots."
+      },
+      "sections": [
+        {
+          "title": "Insertion Sort",
+          "summary": "An incremental sorting algorithm that is simple, in place and fast on small or nearly sorted inputs.",
+          "requires": ["Sorting", "Loop Invariants", "Big-O Notation"],
+          "text": "Insertion sort works the way many people sort a hand of playing cards. It keeps a sorted prefix of the array and, at each step, takes the next element (the key) and shifts larger elements of the prefix one position to the right until the key's position is found. It sorts in place, using only a constant amount of extra memory, and it is stable: equal elements keep their relative order. In the worst case, an array sorted in reverse, each key is compared with every element of the prefix, giving Theta(n^2) time. In the best case, an already sorted array, it takes Theta(n). Because of its low overhead, insertion sort is often used for small arrays inside faster algorithms.",
+          "key_ideas": ["Grows a sorted prefix by inserting one key at a time", "In place and stable", "Theta(n^2) worst case, Theta(n) on sorted input"],
+          "question": "Why is insertion sort used inside faster sorting algorithms?",
+          "quiz": [
+            {"prompt": "What is the worst-case running time of insertion sort?", "options": ["Theta(n)", "Theta(n log n)", "Theta(n^2)", "Theta(log n)"], "answer_index": 2, "feedback": "A reversed array makes every key travel to the front."},
+            {"prompt": "Insertion sort is in place. This means...", "options": ["it never moves elements", "it uses only constant extra memory", "it is always fast", "it only works on linked lists"], "answer_index": 1, "feedback": "Elements are rearranged inside the input array."},
+            {"prompt": "A stable sort...", "options": ["never crashes", "keeps equal elements in their original relative order", "runs in Theta(n log n)", "uses no comparisons"], "answer_index": 1, "feedback": "Stability is about the order of equal keys."}
+          ]
+        },
+        {
+          "title": "Merge Sort",
+          "summary": "A divide-and-conquer sort that always runs in Theta(n log n) time using extra memory for merging.",
+          "requires": ["Insertion Sort", "Analyzing Loops and Recursion"],
+          "text": "Merge sort follows the divide-and-conquer paradigm. Divide: split the array into two halves. Conquer: sort each half recursively. Combine: merge the two sorted halves into one sorted array. Merging walks through both halves with two pointers, always copying the smaller front element, so it takes Theta(n) time. The recurrence T(n) = 2T(n/2) + Theta(n) gives Theta(n log n) in every case: best, average and worst. Merge sort is stable, but the standard array version needs Theta(n) extra memory for the merge step. It works well on linked lists and on data too large to fit in memory, where its sequential access pattern is an advantage.",
+          "key_ideas": ["Divide, conquer, combine", "Merging two sorted halves takes linear time", "Always Theta(n log n); needs Theta(n) extra memory"],
+          "question": "How does the merge step of merge sort work?",
+          "quiz": [
+            {"prompt": "What are the three steps of divide and conquer?", "options": ["Split, sort, search", "Divide, conquer, combine", "Partition, pivot, swap", "Insert, shift, place"], "answer_index": 1, "feedback": "Divide the problem, solve subproblems, combine the answers."},
+            {"prompt": "How long does merging two sorted halves with n elements in total take?", "options": ["Theta(1)", "Theta(log n)", "Theta(n)", "Theta(n^2)"], "answer_index": 2, "feedback": "Each element is copied once."},
+            {"prompt": "What is the main drawback of array merge sort?", "options": ["Theta(n^2) worst case", "It is not stable", "It needs Theta(n) extra memory", "It only sorts integers"], "answer_index": 2, "feedback": "The merge step needs an auxiliary array."}
+          ]
+        },
+        {
+          "title": "Quicksort",
+          "summary": "An in-place divide-and-conquer sort that partitions around a pivot; fast on average, quadratic in the worst case.",
+          "requires": ["Merge Sort"],
+          "text": "Quicksort also uses divide and conquer, but it does the hard work before recursing. It picks a pivot element and partitions the array so that elements smaller than the pivot come before it and larger elements come after it. The pivot is then in its final position, and quicksort recursively sorts the two sides. Partitioning takes Theta(n) time and happens in place. If the pivot always splits the array evenly, the running time is Theta(n log n). If the pivot is always the smallest or largest element, for example when the first element is chosen on an already sorted array, the split is maximally unbalanced and the running time degrades to Theta(n^2). Choosing the pivot at random makes the expected running time Theta(n log n) on every input. In practice quicksort is often the fastest comparison sort because of its small constant factors and good cache behaviour.",
+          "key_ideas": ["Partition around a pivot, then recurse on both sides", "In place; Theta(n log n) expected with a random pivot", "Bad pivots give Theta(n^2)"],
+          "question": "Why does choosing a random pivot make quicksort faster?",
+          "quiz": [
+            {"prompt": "After partitioning, where is the pivot?", "options": ["At the start of the array", "In its final sorted position", "At the end of the array", "Anywhere"], "answer_index": 1, "feedback": "Smaller elements are on its left and larger on its right."},
+            {"prompt": "When does quicksort take Theta(n^2) time?", "options": ["When the pivot splits evenly", "When the pivot is always the smallest or largest element", "When the array has duplicates", "Never"], "answer_index": 1, "feedback": "Maximally unbalanced partitions lead to quadratic time."},
+            {"prompt": "What is the expected running time of randomized quicksort?", "options": ["Theta(n)", "Theta(n log n)", "Theta(n^2)", "Theta(log n)"], "answer_index": 1, "feedback": "A random pivot gives balanced splits on average."}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Data Structures",
+      "summary": "Ways of organizing data so that the operations an algorithm needs are fast.",
+      "text": "An algorithm is only as fast as the operations it performs on its data. A data structure organizes data to support a set of operations efficiently, such as insert, delete and search. This chapter presents three families: linear structures with restricted access (stacks and queues), hash tables for fast lookup by key, and binary search trees for ordered data.",
+      "question": "How do I choose the right data structure for a problem?",
+      "open_item": {
+        "prompt": "When would you use a hash table instead of a binary search tree, and vice versa?",
+        "rubric": "A hash table gives expected constant-time insert, delete and search by key but keeps no order; a binary search tree keeps keys in sorted order, supporting minimum, successor and range queries, with operations proportional to the tree height (logarithmic when balanced)."
+      },
+      "sections": [
+        {
+          "title": "Stacks and Queues",
+          "summary": "Last-in-first-out and first-in-first-out collections with constant-time operations.",
+          "requires": ["Data Structures", "Big-O Notation"],
+          "text": "A stack is a last-in, first-out (LIFO) collection: push adds an element on top and pop removes the most recently added one. A queue is first-in, first-out (FIFO): enqueue adds at the tail and dequeue removes from the head. Both can be implemented with an array or a linked list so that every operation takes O(1) time. Stacks appear in recursion (the call stack), expression evaluation and undo features. Queues model waiting lines, buffers between producers and consumers, and they are the core of breadth-first search. A circular array implementation of a queue reuses the free slots at the start of the array, wrapping the head and tail indices around.",
+          "key_ideas": ["Stack: LIFO, push and pop", "Queue: FIFO, enqueue and dequeue", "All operations take O(1) time"],
+          "question": "Why does breadth-first search use a queue and not a stack?",
+          "quiz": [
+            {"prompt": "A stack removes...", "options": ["the oldest element", "the most recently added element", "the smallest element", "a random element"], "answer_index": 1, "feedback": "Last in, first out."},
+            {"prompt": "Which structure models a waiting line?", "options": ["Stack", "Queue", "Binary search tree", "Hash table"], "answer_index": 1, "feedback": "First come, first served: FIFO."},
+            {"prompt": "What is the cost of push and pop on a well-implemented stack?", "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"], "answer_index": 0, "feedback": "Both work at the top only."}
+          ]
+        },
+        {
+          "title": "Hash Tables",
+          "summary": "Key-value storage with expected constant-time operations using a hash function and collision handling.",
+          "requires": ["Stacks and Queues"],
+          "text": "A hash table stores key-value pairs in an array of buckets. A hash function maps each key to a bucket index. When two keys hash to the same bucket we have a collision. With chaining, each bucket holds a linked list of the pairs that hash there. With open addressing, a colliding key probes other slots of the array until it finds a free one. If the hash function spreads keys uniformly and the load factor (number of keys divided by number of buckets) stays bounded, insert, delete and search take O(1) expected time. When the load factor grows too large the table is resized, typically doubling, and every key is rehashed. Hash tables do not keep keys in order, so operations such as finding the minimum key take O(n) time.",
+          "key_ideas": ["A hash function maps keys to buckets", "Collisions are handled by chaining or open addressing", "O(1) expected time with a bounded load factor; no ordering"],
+          "question": "What happens in a hash table when two keys collide?",
+          "quiz": [
+            {"prompt": "What is a collision in a hash table?", "options": ["Two keys mapping to the same bucket", "A key that is not found", "A full array", "A duplicate value"], "answer_index": 0, "feedback": "Different keys can share a hash value."},
+            {"prompt": "What is the load factor?", "options": ["Number of keys divided by number of buckets", "Size of each key", "Time to compute the hash", "Number of collisions"], "answer_index": 0, "feedback": "It measures how full the table is."},
+            {"prompt": "Which operation is slow in a hash table?", "options": ["Search by key", "Insert", "Finding the minimum key", "Delete by key"], "answer_index": 2, "feedback": "Keys are not kept in order."}
+          ]
+        },
+        {
+          "title": "Binary Search Trees",
+          "summary": "Ordered trees supporting search, insertion and in-order traversal in time proportional to their height.",
+          "requires": ["Stacks and Queues", "Analyzing Loops and Recursion"],
+          "text": "A binary search tree stores keys in nodes so that, for every node, keys in its left subtree are smaller and keys in its right subtree are larger. Searching starts at the root and goes left or right at each node, so it takes O(h) time, where h is the height of the tree. Insertion follows the same path and adds the new key as a leaf. An in-order traversal visits the keys in sorted order in Theta(n) time, and operations such as minimum, maximum, successor and range queries are natural. The weakness is the height: inserting keys in sorted order produces a tree that is just a long path, with h = n. Balanced trees such as red-black trees and AVL trees restructure themselves to keep h = O(log n).",
+          "key_ideas": ["Left subtree smaller, right subtree larger", "Search and insert take O(h) time", "Balanced trees keep h = O(log n)"],
+          "question": "Why do binary search trees need to be balanced?",
+          "quiz": [
+            {"prompt": "In a binary search tree, keys in the left subtree of a node are...", "options": ["larger than the node", "smaller than the node", "equal to the node", "unordered"], "answer_index": 1, "feedback": "That is the binary search tree property."},
+            {"prompt": "Which traversal lists the keys in sorted order?", "options": ["Pre-order", "In-order", "Post-order", "Level-order"], "answer_index": 1, "feedback": "Left subtree, node, right subtree."},
+            {"prompt": "What happens if keys are inserted in sorted order into a plain BST?", "options": ["The tree stays balanced", "The tree becomes a path of height n", "Insertion fails", "The keys are rehashed"], "answer_index": 1, "feedback": "Every new key goes to the right of the previous one."}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Graph Algorithms",
+      "summary": "Representing networks of vertices and edges and exploring them efficiently.",
+      "text": "Graphs model relationships: road networks, social networks, dependencies between tasks, links between web pages. A graph G = (V, E) has a set of vertices V and a set of edges E. This chapter shows how to store graphs, how to explore them systematically with breadth-first search and how to find shortest paths when edges have weights.",
+      "question": "What kinds of real problems can be modelled as graphs?",
+      "open_item": {
+        "prompt": "Explain how breadth-first search and Dijkstra's algorithm find shortest paths, and when each one applies.",
+        "rubric": "Breadth-first search explores vertices in order of distance using a queue and finds shortest paths in unweighted graphs; Dijkstra's algorithm uses a priority queue to repeatedly settle the closest unvisited vertex and finds shortest paths in graphs with non-negative edge weights."
+      },
+      "sections": [
+        {
+          "title": "Graph Representations",
+          "summary": "Adjacency lists and adjacency matrices and their space and time trade-offs.",
+          "requires": ["Graph Algorithms", "Stacks and Queues"],
+          "text": "There are two standard ways to store a graph G = (V, E). An adjacency list keeps, for each vertex, a list of its neighbours. It uses Theta(V + E) space and lets us iterate over the neighbours of a vertex in time proportional to its degree, which is ideal for sparse graphs, where E is much smaller than V^2. An adjacency matrix is a V x V table whose entry (u, v) is 1 when there is an edge from u to v. It uses Theta(V^2) space but answers the question 'is there an edge between u and v?' in O(1) time, which suits dense graphs. Weighted graphs store the weight in the list entry or the matrix cell. Directed graphs store each edge once; undirected graphs store it in both directions.",
+          "key_ideas": ["Adjacency list: Theta(V + E) space, good for sparse graphs", "Adjacency matrix: Theta(V^2) space, O(1) edge test", "Weights are stored alongside each edge"],
+          "question": "When is an adjacency matrix better than an adjacency list?",
+          "quiz": [
+            {"prompt": "How much space does an adjacency list use?", "options": ["Theta(V)", "Theta(E)", "Theta(V + E)", "Theta(V^2)"], "answer_index": 2, "feedback": "One list per vertex plus one entry per edge."},
+            {"prompt": "Which representation tests 'is there an edge (u, v)?' in O(1)?", "options": ["Adjacency list", "Adjacency matrix", "Edge list", "Queue"], "answer_index": 1, "feedback": "Just look up one cell of the matrix."},
+            {"prompt": "A sparse graph has...", "options": ["E much smaller than V^2", "E close to V^2", "no edges", "only weighted edges"], "answer_index": 0, "feedback": "Most possible edges are missing."}
+          ]
+        },
+        {
+          "title": "Breadth-First Search",
+          "summary": "Exploring a graph level by level with a queue; shortest paths in unweighted graphs.",
+          "requires": ["Graph Representations"],
+          "text": "Breadth-first search (BFS) explores a graph from a source vertex s in waves. It first visits all neighbours of s, then all vertices two edges away, and so on. A queue holds the discovered vertices that still need to be explored, which guarantees that vertices are processed in order of their distance from s. Each vertex is marked when discovered so it is enqueued only once. With an adjacency list, BFS runs in O(V + E) time. As a by-product it computes, for every reachable vertex, the minimum number of edges from s and a predecessor pointer; following predecessors back to s gives a shortest path. BFS therefore solves the shortest path problem in unweighted graphs, but not when edges have different weights.",
+          "key_ideas": ["Explores vertices in order of distance from the source", "Uses a queue; O(V + E) time", "Gives shortest paths in unweighted graphs"],
+          "question": "Does breadth-first search work for weighted graphs?",
+          "quiz": [
+            {"prompt": "Which data structure does BFS use?", "options": ["Stack", "Queue", "Hash table", "Binary search tree"], "answer_index": 1, "feedback": "FIFO order produces the level-by-level exploration."},
+            {"prompt": "What is the running time of BFS with adjacency lists?", "options": ["O(V)", "O(E log V)", "O(V + E)", "O(V^2)"], "answer_index": 2, "feedback": "Each vertex and each edge is handled a constant number of times."},
+            {"prompt": "BFS computes shortest paths in...", "options": ["any weighted graph", "unweighted graphs", "graphs with negative weights", "trees only"], "answer_index": 1, "feedback": "It counts edges, ignoring weights."}
+          ]
+        },
+        {
+          "title": "Shortest Paths with Dijkstra",
+          "summary": "Single-source shortest paths with non-negative weights using a priority queue.",
+          "requires": ["Breadth-First Search", "Binary Search Trees"],
+          "text": "Dijkstra's algorithm finds shortest paths from a source s in a graph whose edge weights are non-negative. It keeps a tentative distance d[v] for every vertex, starting with d[s] = 0 and infinity elsewhere. At each step it removes from a priority queue the unsettled vertex u with the smallest d[u]; that distance is now final. It then relaxes every edge (u, v): if d[u] + w(u, v) < d[v], it lowers d[v] and records u as v's predecessor. With a binary heap the algorithm runs in O((V + E) log V) time. The greedy choice is safe only because weights are non-negative: a later path cannot become shorter by adding more edges. With negative weights, the Bellman-Ford algorithm must be used instead.",
+          "key_ideas": ["Settles the closest unsettled vertex at every step", "Relaxation: d[v] = min(d[v], d[u] + w(u, v))", "Needs non-negative weights; O((V + E) log V) with a heap"],
+          "question": "Why doesn't Dijkstra's algorithm work with negative weights?",
+          "quiz": [
+            {"prompt": "Which structure lets Dijkstra pick the closest unsettled vertex efficiently?", "options": ["Queue", "Stack", "Priority queue", "Adjacency matrix"], "answer_index": 2, "feedback": "A min-priority queue returns the smallest tentative distance."},
+            {"prompt": "What does relaxing an edge (u, v) do?", "options": ["Deletes the edge", "Lowers d[v] if going through u is shorter", "Increases the weight", "Marks v as visited"], "answer_index": 1, "feedback": "It tries to improve the tentative distance of v."},
+            {"prompt": "Dijkstra's algorithm requires...", "options": ["an unweighted graph", "non-negative edge weights", "a tree", "a dense graph"], "answer_index": 1, "feedback": "Negative weights break the greedy choice."}
+          ]
+        }
+      ]
+    }
+  ]
+}

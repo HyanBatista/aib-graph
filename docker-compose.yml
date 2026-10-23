@@ -1,0 +1,62 @@
+# Backend for the desktop app: API + websockets on http://localhost:8000
+#   docker compose up --build                         # needs DJANGO_SECRET_KEY (and GEMINI_API_KEY) in .env
+#   DJANGO_DEBUG=1 SEED_DEMO=1 LLM_PROVIDER=fake docker compose up   # local offline demo, dev secret key
+x-server-env: &server-env
+  DATABASE_URL: postgres://aib:aib@postgres:5432/aib
+  REDIS_URL: redis://redis:6379/0
+  MEDIA_ROOT: /data/media
+  # No default: outside DEBUG the server refuses to start without a real key.
+  DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-}
+  DJANGO_DEBUG: ${DJANGO_DEBUG:-0}
+  GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+  LLM_PROVIDER: ${LLM_PROVIDER:-}
+  GEMINI_MODEL_PRO: ${GEMINI_MODEL_PRO:-gemini-2.5-pro}
+  GEMINI_MODEL_FLASH: ${GEMINI_MODEL_FLASH:-gemini-2.5-flash}
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: aib
+      POSTGRES_PASSWORD: aib
+      POSTGRES_DB: aib
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aib"]
+      interval: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      retries: 20
+
+  server:
+    build: ./server
+    environment:
+      <<: *server-env
+      RUN_MIGRATIONS: "1"
+      SEED_DEMO: ${SEED_DEMO:-0}
+    ports:
+      - "8000:8000"
+    volumes:
+      - media:/data/media
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+
+  worker:
+    build: ./server
+    command: ["celery", "-A", "config", "worker", "--loglevel=info", "--concurrency=4"]
+    environment: *server-env
+    volumes:
+      - media:/data/media
+    depends_on:
+      server: { condition: service_started }
+
+volumes:
+  pgdata:
+  media:
