@@ -1,0 +1,17 @@
+.env
+.DS_Store
+
+# server
+server/.venv/
+server/db.sqlite3
+server/media/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# desktop
+desktop/node_modules/
+desktop/out/
+desktop/dist/
+desktop/test-results/
+desktop/playwright-report/

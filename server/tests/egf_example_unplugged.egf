@@ -1,0 +1,414 @@
+{
+  "$schema": "https://edukors.org/graph/schema/v1/",
+  "info": {
+    "course-id": "6d888bac-4149-4e0a-a990-8db9c0830301",
+    "source-language": "pt",
+    "other-languages": [
+      "en"
+    ],
+    "title": [
+      {
+        "lang": "pt",
+        "text": "Exemplo de curso adaptativo simples"
+      },
+      {
+        "lang": "en",
+        "text": "Example of a simple adaptive course"
+      }
+    ],
+    "author": "Edukors.org",
+    "version": "1.0.0",
+    "date": "2026-10-17",
+    "start": "sm1",
+    "description": [
+      {
+        "lang": "pt",
+        "text": "Este curso é apenas um exemplo de curso adaptativo simples, criado para mostrar como funciona o formato Edukors Graph. O tema escolhido, a título de ilustração, é uma introdução aos felinos do mundo, com sua origem comum e o plano corporal adaptado à emboscada. Depois de um texto introdutório, o estudante responde a um quiz curto, e quem acerta uma questão ou menos passa por uma revisão antes da conclusão."
+      },
+      {
+        "lang": "en",
+        "text": "This course is only an example of a simple adaptive course, created to show how the Edukors Graph format works. The topic chosen, for illustration, is an introduction to the felines of the world, with their common origin and the body plan adapted to ambush. After an introductory text, the student answers a short quiz, and those who get one question or fewer right go through a review before the conclusion."
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "q1",
+      "type": "quiz",
+      "section": 1,
+      "position": {
+        "x": 95,
+        "y": 174
+      },
+      "title": [
+        {
+          "lang": "pt",
+          "text": "Verificação da introdução"
+        },
+        {
+          "lang": "en",
+          "text": "Introduction check"
+        }
+      ],
+      "content": {
+        "items": [
+          {
+            "question": [
+              {
+                "lang": "pt",
+                "text": "Em quais regiões do mundo os felinos não ocorrem naturalmente?"
+              },
+              {
+                "lang": "en",
+                "text": "In which regions of the world do felines not occur naturally?"
+              }
+            ],
+            "options": [
+              {
+                "value": "a",
+                "label": [
+                  {
+                    "lang": "pt",
+                    "text": "África e Ásia"
+                  },
+                  {
+                    "lang": "en",
+                    "text": "Africa and Asia"
+                  }
+                ],
+                "correct": false
+              },
+              {
+                "value": "b",
+                "label": [
+                  {
+                    "lang": "pt",
+                    "text": "Antártida e Oceania"
+                  },
+                  {
+                    "lang": "en",
+                    "text": "Antarctica and Oceania"
+                  }
+                ],
+                "correct": true
+              },
+              {
+                "value": "c",
+                "label": [
+                  {
+                    "lang": "pt",
+                    "text": "Américas e Europa"
+                  },
+                  {
+                    "lang": "en",
+                    "text": "The Americas and Europe"
+                  }
+                ],
+                "correct": false
+              },
+              {
+                "value": "d",
+                "label": [
+                  {
+                    "lang": "pt",
+                    "text": "Ásia e Oceania"
+                  },
+                  {
+                    "lang": "en",
+                    "text": "Asia and Oceania"
+                  }
+                ],
+                "correct": false
+              }
+            ],
+            "feedback": [
+              {
+                "lang": "pt",
+                "text": "Os felinos ocorrem naturalmente em todos os continentes, com exceção da Antártida e da Oceania. Na Oceania, os gatos só chegaram com os colonizadores humanos."
+              },
+              {
+                "lang": "en",
+                "text": "Felines occur naturally on every continent except Antarctica and Oceania. Cats only reached Oceania with human colonizers."
+              }
+            ]
+          },
+          {
+            "question": [
+              {
+                "lang": "pt",
+                "text": "Há quanto tempo viveu o ancestral comum de todas as espécies de felinos?"
+              },
+              {
+                "lang": "en",
+                "text": "How long ago did the common ancestor of all feline species live?"
+              }
+            ],
+            "options": [
+              {
+                "value": "a",
+                "label": [
+                  {
+                    "lang": "pt",
+                    "text": "Cerca de 100 mil anos"
+                  },
+                  {
+                    "lang": "en",
+                    "text": "About 100,000 years ago"
+                  }
+                ],
+                "correct": false
+              },
+              {
+                "value": "b",
+                "label": [
+                  {
+                    "lang": "pt",
+                    "text": "Cerca de 1 milhão de anos"
+                  },
+                  {
+                    "lang": "en",
+                    "text": "About 1 million years ago"
+                  }
+                ],
+                "correct": false
+              },
+              {
+                "value": "c",
+                "label": [
+                  {
+                    "lang": "pt",
+                    "text": "Cerca de 10 milhões de anos"
+                  },
+                  {
+                    "lang": "en",
+                    "text": "About 10 million years ago"
+                  }
+                ],
+                "correct": true
+              },
+              {
+                "value": "d",
+                "label": [
+                  {
+                    "lang": "pt",
+                    "text": "Cerca de 40 milhões de anos"
+                  },
+                  {
+                    "lang": "en",
+                    "text": "About 40 million years ago"
+                  }
+                ],
+                "correct": false
+              }
+            ],
+            "feedback": [
+              {
+                "lang": "pt",
+                "text": "As cerca de 40 espécies de felinos descendem de um ancestral comum que viveu há aproximadamente 10 milhões de anos."
+              },
+              {
+                "lang": "en",
+                "text": "The roughly 40 species of felines descend from a common ancestor that lived about 10 million years ago."
+              }
+            ]
+          },
+          {
+            "question": [
+              {
+                "lang": "pt",
+                "text": "Qual das características abaixo faz parte do plano corporal compartilhado por todos os felinos?"
+              },
+              {
+                "lang": "en",
+                "text": "Which of the features below is part of the body plan shared by all felines?"
+              }
+            ],
+            "options": [
+              {
+                "value": "a",
+                "label": [
+                  {
+                    "lang": "pt",
+                    "text": "Garras retráteis"
+                  },
+                  {
+                    "lang": "en",
+                    "text": "Retractable claws"
+                  }
+                ],
+                "correct": true
+              },
+              {
+                "value": "b",
+                "label": [
+                  {
+                    "lang": "pt",
+                    "text": "Dentes adaptados para triturar plantas"
+                  },
+                  {
+                    "lang": "en",
+                    "text": "Teeth adapted for grinding plants"
+                  }
+                ],
+                "correct": false
+              },
+              {
+                "value": "c",
+                "label": [
+                  {
+                    "lang": "pt",
+                    "text": "Visão limitada ao período diurno"
+                  },
+                  {
+                    "lang": "en",
+                    "text": "Vision limited to daytime"
+                  }
+                ],
+                "correct": false
+              },
+              {
+                "value": "d",
+                "label": [
+                  {
+                    "lang": "pt",
+                    "text": "Corpo adaptado à corrida de longa distância"
+                  },
+                  {
+                    "lang": "en",
+                    "text": "A body adapted to long-distance running"
+                  }
+                ],
+                "correct": false
+              }
+            ],
+            "feedback": [
+              {
+                "lang": "pt",
+                "text": "Por descenderem de um mesmo ancestral, os felinos compartilham garras retráteis, dentes feitos para cortar carne, visão noturna aguçada e um corpo adaptado à emboscada."
+              },
+              {
+                "lang": "en",
+                "text": "Because they descend from the same ancestor, felines share retractable claws, teeth made for cutting meat, keen night vision and a body adapted to ambush."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "sm2",
+      "type": "static-md",
+      "section": 1,
+      "position": {
+        "x": -112,
+        "y": 317
+      },
+      "title": [
+        {
+          "lang": "pt",
+          "text": "Revisão da introdução"
+        },
+        {
+          "lang": "en",
+          "text": "Introduction review"
+        }
+      ],
+      "content": {
+        "item": [
+          {
+            "lang": "pt",
+            "text": "Vale a pena retomar alguns pontos da introdução.\n\nExistem cerca de 40 espécies de felinos no mundo. Elas ocorrem naturalmente em todos os continentes, com exceção da **Antártida** e da **Oceania**. Na Oceania, os gatos só chegaram com os colonizadores humanos, de modo que sua presença ali é resultado da ação das pessoas.\n\nTodas essas espécies descendem de um **ancestral comum que viveu há cerca de 10 milhões de anos**. Em termos evolutivos, esse é um intervalo relativamente curto, e por isso as diferenças entre as espécies atuais estão sobretudo no tamanho e no ambiente em que vivem.\n\nDessa origem comum vem um **plano corporal compartilhado**. Os felinos têm garras retráteis, que ficam recolhidas durante a caminhada e se estendem no momento do ataque. Seus dentes são feitos para cortar carne, sua visão noturna é aguçada e seu corpo está adaptado à emboscada, com aproximação silenciosa e um ataque curto e rápido. Um leão de 190 kg e um gato doméstico de 4 kg seguem esse mesmo modelo.\n\n"
+          },
+          {
+            "lang": "en",
+            "text": "It is worth going back over some points from the introduction.\n\nThere are about 40 species of felines in the world. They occur naturally on every continent except **Antarctica** and **Oceania**. Cats only reached Oceania with human colonizers, so their presence there is the result of human action.\n\nAll these species descend from a **common ancestor that lived about 10 million years ago**. In evolutionary terms this is a relatively short span, and for that reason the differences among today's species lie mostly in their size and in the environment where they live.\n\nFrom this common origin comes a **shared body plan**. Felines have retractable claws, which stay drawn in while they walk and extend at the moment of the attack. Their teeth are made for cutting meat, their night vision is keen and their body is adapted to ambush, with a silent approach and a short, fast attack. A 190 kg lion and a 4 kg house cat follow this same model."
+          }
+        ]
+      }
+    },
+    {
+      "id": "sm3",
+      "type": "static-md",
+      "position": {
+        "x": 95,
+        "y": 498
+      },
+      "title": [
+        {
+          "lang": "pt",
+          "text": "Conclusão"
+        },
+        {
+          "lang": "en",
+          "text": "Conclusion"
+        }
+      ],
+      "content": {
+        "item": [
+          {
+            "lang": "pt",
+            "text": "Este curso acompanhou as cerca de 40 espécies de felinos do mundo, do gato doméstico no sofá ao tigre na floresta. Olhando para trás, uma ideia liga todos os capítulos: todos os felinos são variações de um mesmo plano corporal, moldado ao longo de cerca de 10 milhões de anos para a emboscada.\n\n### Um corpo, um modo de caçar\n\nUma coluna flexível, garras retráteis, dentes carniceiros que cortam a carne, olhos que enxergam no crepúsculo, orelhas que ouvem os roedores e bigodes que sentem o ar fazem dos felinos especialistas em se aproximar sem ser vistos e terminar a caçada num ataque curto. A maioria vive e caça sozinha, marca um território e ensina os filhotes trazendo-lhes presas.\n\n### O gato que entrou em casa\n\nO gato doméstico descende do gato-selvagem-africano, que se aproximou das primeiras aldeias agrícolas há cerca de 10.000 anos, atrás dos roedores atraídos pelos grãos armazenados. Cultuado no Egito e levado em navios a quase todos os portos do mundo, foi valorizado durante milhares de anos como caçador de ratos. Raças como o Siamês, o Persa, o Angorá Turco e o Bengal surgiram muito depois, sobretudo a partir do século XIX, e mudaram muito mais a sua aparência do que o seu comportamento.\n\n### Grandes e pequenos felinos selvagens\n\nOs grandes felinos, como o leão, o tigre, a onça-pintada e o leopardo, que rugem, e a onça-parda e o guepardo, que ronronam, ocupam o topo da cadeia alimentar e funcionam como espécies guarda-chuva: protegê-los protege ecossistemas inteiros. Os pequenos felinos selvagens, como o lince-euro-asiático, o serval, o caracal e a jaguatirica, mostram como o mesmo plano se adapta à neve, à savana, ao deserto e à floresta tropical, cada um com sua própria técnica de caça.\n\n### O que fica\n\nMuitas dessas espécies estão em declínio por causa da perda de hábitat, da diminuição das presas, do conflito com criadores e da caça ilegal. Ainda assim, a recuperação do tigre na Índia e no Nepal, do lince na Europa e da jaguatirica nas Américas mostra que a proteção funciona quando as pessoas decidem dividir a terra. Conhecer esses animais, do maior ao menor, é o primeiro passo para essa decisão."
+          },
+          {
+            "lang": "en",
+            "text": "This course has followed the roughly 40 species of felines in the world, from the house cat on the sofa to the tiger in the forest. Looking back, one idea connects every chapter. All felines are variations of a single body plan, shaped over about 10 million years for ambush.\n\n### One body, one way of hunting\n\nA flexible spine, retractable claws, carnassial teeth that slice meat, eyes that see at dusk, ears that hear rodents and whiskers that sense the air make felines specialists in approaching unseen and ending the hunt with a short attack. Most of them live and hunt alone, mark a territory and teach their young by bringing them prey.\n\n### The cat that came indoors\n\nThe house cat descends from the African wildcat, which drew close to the first farming villages about 10,000 years ago, following the rodents attracted by stored grain. Worshipped in Egypt and carried on ships to nearly every port in the world, it was valued for thousands of years as a mouser. Breeds such as the Siamese, the Persian, the Turkish Angora and the Bengal appeared much later, mostly from the nineteenth century onward, and changed its appearance far more than its behavior.\n\n### Big cats and small wild cats\n\nThe big cats (the lion, the tiger, the jaguar and the leopard, which roar, and the puma and the cheetah, which purr) sit at the top of the food chain and act as umbrella species, so protecting them protects entire ecosystems. The small wild cats, such as the Eurasian lynx, the serval, the caracal and the ocelot, show how the same plan adapts to snow, savanna, desert and tropical forest, each with its own hunting technique.\n\n### What remains\n\nMany of these species are in decline because of habitat loss, dwindling prey, conflict with livestock farmers and poaching. Even so, the recovery of the tiger in India and Nepal, of the lynx in Europe and of the ocelot in the Americas shows that protection works when people decide to share the land. Getting to know these animals, from the largest to the smallest, is the first step toward that decision."
+          }
+        ]
+      }
+    },
+    {
+      "id": "sm1",
+      "type": "static-md",
+      "section": 1,
+      "position": {
+        "x": 95,
+        "y": 12
+      },
+      "title": [
+        {
+          "lang": "pt",
+          "text": "Introdução"
+        },
+        {
+          "lang": "en",
+          "text": "Introduction"
+        }
+      ],
+      "content": {
+        "item": [
+          {
+            "lang": "pt",
+            "text": "Existem cerca de 40 espécies de felinos no mundo, e elas ocorrem naturalmente em todos os continentes, exceto a Antártida e a Oceania, aonde os gatos só chegaram com os colonizadores humanos. Todas descendem de um ancestral comum que viveu há cerca de 10 milhões de anos e, por isso, compartilham o mesmo plano corporal, com garras retráteis, dentes feitos para cortar carne, visão noturna aguçada e um corpo adaptado à emboscada. Um leão de 190 kg e um gato doméstico de 4 kg são, nesse sentido, variações de um mesmo tema.\n\nEste curso acompanha esse grupo em seções organizadas pelo tamanho e pela relação que cada grupo tem com as pessoas. As espécies e raças listadas abaixo são exemplos, escolhidos para mostrar a diversidade dentro de cada grupo, e cada grupo inclui muitas outras.\n\n- **Grandes felinos**, como o leão, o tigre, a onça-pintada, o leopardo, a onça-parda e o guepardo.\n- **Pequenos felinos selvagens**, como o lince-euroasiático, o serval, o caracal e a jaguatirica.\n- **Gatos domésticos**, com raças como o Siamês, o Persa, o Angorá Turco e o Bengal."
+          },
+          {
+            "lang": "en",
+            "text": "There are about 40 species of cats in the world, and they occur naturally on every continent except Antarctica and Oceania, where cats arrived only with human settlers. All of them descend from a common ancestor that lived some 10 million years ago, and for this reason they share the same body plan, with retractable claws, teeth shaped to slice meat, sharp night vision and a build suited to the ambush. A lion of 190 kg and a house cat of 4 kg are, in this sense, variations on a single theme.\n\nThis course follows that group in sections organized by size and by the relationship each group has with people. The species and breeds listed below are examples, chosen to show the diversity within each group, and each group includes many others.\n\n- **Big cats**, such as the lion, tiger, jaguar, leopard, cougar and cheetah.\n- **Small wild cats**, such as the Eurasian lynx, serval, caracal and ocelot.\n- **Domestic cats**, with breeds such as the Siamese, Persian, Turkish Angora and Bengal."
+          }
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "q1",
+      "to": "sm2",
+      "when": {
+        "key": "q1.score",
+        "operator": "lte",
+        "value": 1
+      }
+    },
+    {
+      "from": "sm2",
+      "to": "sm3"
+    },
+    {
+      "from": "q1",
+      "to": "sm3"
+    },
+    {
+      "from": "sm1",
+      "to": "q1"
+    }
+  ]
+}

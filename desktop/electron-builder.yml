@@ -1,0 +1,17 @@
+appId: org.aib.graph
+productName: AIB Graph
+directories:
+  buildResources: build
+  output: dist
+files:
+  - out/**
+  - package.json
+asarUnpack: []
+mac:
+  category: public.app-category.education
+  target: [dmg]
+win:
+  target: [nsis]
+linux:
+  target: [AppImage]
+  category: Education
