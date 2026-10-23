@@ -20,6 +20,16 @@ server/    Django + Django Ninja + Channels + Celery, Postgres, Redis, Gemini
 
 ## Quick start (offline demo, no API key)
 
+With `make` (run `make` alone to list every command):
+
+```bash
+make install      # server and desktop dependencies
+make seed         # migrate + demo users and classes (make reset-demo to rebuild)
+make dev          # server on http://127.0.0.1:8000 and the desktop app
+```
+
+Or step by step:
+
 ```bash
 cd server
 uv sync
