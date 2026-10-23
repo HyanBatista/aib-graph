@@ -6,13 +6,22 @@ DESKTOP := desktop
 HOST ?= 127.0.0.1
 PORT ?= 8000
 
+# Desktop app options, e.g. `make desktop-start PROFILE=ana SERVER_URL=http://10.0.0.5:8000`.
+#   SERVER_URL  server the app talks to (default: the one saved on the login screen, else localhost:8000)
+#   PROFILE     separate login and settings, to run several users side by side (kept in desktop/.profiles/)
+SERVER_URL ?=
+PROFILE ?=
+DESKTOP_ENV := $(if $(SERVER_URL),AIB_SERVER_URL=$(SERVER_URL)) \
+	$(if $(PROFILE),AIB_USER_DATA=$(abspath $(DESKTOP))/.profiles/$(PROFILE))
+
 .DEFAULT_GOAL := help
 .PHONY: help install migrate seed reset-demo server desktop dev \
+	desktop-build desktop-start desktop-dist desktop-dist-mac desktop-dist-win desktop-dist-linux desktop-clean \
 	test test-server test-desktop typecheck e2e \
 	docker-demo docker-up docker-down secret
 
 help: ## List the available commands
-	@grep -E '^[a-zA-Z0-9_-]+:.*## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-14s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z0-9_-]+:.*## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 # --- Local development -------------------------------------------------------
 
@@ -32,11 +41,34 @@ reset-demo: migrate ## Rebuild the demo users and classes from scratch
 server: migrate ## Start the server (HOST and PORT default to 127.0.0.1 and 8000)
 	cd $(SERVER) && uv run daphne -b $(HOST) -p $(PORT) config.asgi:application
 
-desktop: ## Start the desktop app in development mode
-	cd $(DESKTOP) && npm run dev
+desktop: ## Start the desktop app in development mode, with hot reload
+	cd $(DESKTOP) && $(DESKTOP_ENV) npm run dev
 
 dev: migrate ## Start the server and the desktop app together (Ctrl-C stops both)
 	$(MAKE) -j2 server desktop
+
+# --- Desktop app: build and package ---------------------------------------------
+
+desktop-build: ## Build the desktop app into desktop/out/
+	cd $(DESKTOP) && npm run build
+
+desktop-start: desktop-build ## Build and run the desktop app as in production (no dev server)
+	cd $(DESKTOP) && $(DESKTOP_ENV) npx electron .
+
+desktop-dist: desktop-build ## Package an installer for this OS into desktop/dist/
+	cd $(DESKTOP) && npx electron-builder
+
+desktop-dist-mac: desktop-build ## Package the macOS .dmg
+	cd $(DESKTOP) && npx electron-builder --mac
+
+desktop-dist-win: desktop-build ## Package the Windows installer (.exe)
+	cd $(DESKTOP) && npx electron-builder --win
+
+desktop-dist-linux: desktop-build ## Package the Linux .AppImage
+	cd $(DESKTOP) && npx electron-builder --linux
+
+desktop-clean: ## Remove desktop build output, installers and local profiles
+	rm -rf $(DESKTOP)/out $(DESKTOP)/dist $(DESKTOP)/.profiles
 
 # --- Checks ------------------------------------------------------------------
 

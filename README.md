@@ -28,6 +28,15 @@ make seed         # migrate + demo users and classes (make reset-demo to rebuild
 make dev          # server on http://127.0.0.1:8000 and the desktop app
 ```
 
+The desktop app can also be run from a production build, or packaged:
+
+```bash
+make desktop-start                 # build and run without the dev server
+make desktop-start PROFILE=ana     # a second window with its own login, to try two users at once
+make desktop-start SERVER_URL=http://10.0.0.5:8000   # talk to another server
+make desktop-dist                  # installer for this OS in desktop/dist/ (also desktop-dist-mac/-win/-linux)
+```
+
 Or step by step:
 
 ```bash
